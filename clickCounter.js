@@ -5,7 +5,7 @@ button.addEventListener('click', increment);
 
 function increment() {
     let counter = sessionStorage.getItem('counter'); 
-    console.log(counter);
+    
     if (counter !== 'undefined') {
         cnt = counter;
     }
