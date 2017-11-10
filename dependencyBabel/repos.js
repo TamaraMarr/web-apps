@@ -3,7 +3,7 @@ import axios from 'axios';
 //dohvata json sa servera i obavestava funkciju koja prepakuje podatke
 class Repos {
     getRepos(handler) {
-        axios.get('https://api.github.com/search/repositories?q=explore&per_page=5')
+        axios.get('https://api.github.com/search/repositories?q=marko&per_page=5')
             .then(function (response) {
                 handler(response.data.items);
             })

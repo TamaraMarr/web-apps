@@ -19,7 +19,8 @@ class RepoThing {
         let thingsArr = [];
         
         repoItems.forEach(function(item) {
-            const thing = new Thing(item.name, item.owner.avatar_url);
+            console.log(item);
+            const thing = new Thing(item.name, item.owner.avatar_url, item.html_url);
             thingsArr.push(thing);
         });
         
