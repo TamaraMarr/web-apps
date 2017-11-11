@@ -1,5 +1,6 @@
 // var repo = require("./repos");
-// var thing = require("./thing")
+// var thing = require("./thing");
+
 import Repos from './repos';
 import Thing from './thing';
 

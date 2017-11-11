@@ -5,6 +5,7 @@ class Repos {
     getRepos(handler) {
         axios.get('https://api.github.com/search/repositories?q=marko&per_page=5')
             .then(function (response) {
+                console.log(response);
                 handler(response.data.items);
             })
             .catch(function (error) {
