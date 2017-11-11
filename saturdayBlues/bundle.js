@@ -969,12 +969,13 @@ class Run {
                 var img = $('<img>');
                 img.attr('src', thing.userAvatar);
                 img.css({
-                    'width': '300px',
+                    'width': '100px',
                     'border-radius': '150px'
                 });
-                console.log(img);
+
 
                 var profileDiv = $('<div>');
+                profileDiv.attr('class', 'profileDiv');
 
                 profileDiv.append(clickableName);
                 profileDiv.append(img);

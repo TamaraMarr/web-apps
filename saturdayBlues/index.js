@@ -25,17 +25,19 @@ class Run {
                 var img = $('<img>');
                 img.attr('src', thing.userAvatar);
                 img.css({
-                    'width': '300px',
+                    'width': '200px',
                     'border-radius': '150px'
                 });
-                console.log(img);
+
 
                 var profileDiv = $('<div>');
 
                 profileDiv.append(clickableName);
                 profileDiv.append(img);
                 profileDiv.css({
-                    'text-align': 'center'
+                    'text-align': 'center',
+                    'display': 'inline-block',
+                    'float': 'left'
                 });
                 $('#results').append(profileDiv);
             });
