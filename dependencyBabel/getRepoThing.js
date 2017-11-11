@@ -7,7 +7,7 @@ class RepoThing {
     getData(display) {
         //ekstraktuje podatke iz dobijenog objekta iz repos.js;
         const repo = new Repos();
-        repo.getRepos((items) => {
+        repo.getRepos(items => {
             const resultForMain = this.makeThings(items);
             display(resultForMain);
         });
@@ -19,7 +19,8 @@ class RepoThing {
         let thingsArr = [];
         
         repoItems.forEach(function(item) {
-            const thing = new Thing(item.name, item.owner.avatar_url);
+            console.log(item);
+            const thing = new Thing(item.name, item.owner.avatar_url, item.html_url);
             thingsArr.push(thing);
         });
         
