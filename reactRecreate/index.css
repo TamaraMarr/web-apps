@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+
+* {
+    font-family: 'Barlow', sans-serif;
+}
+
+#app h1 {
+    color: purple;
+    background-color: rgba(141, 132, 132, 0.411);
+    padding-left: 30px;
+    line-height: 2;
+    font-family: 'Indie Flower', cursive;
+    text-transform: uppercase;
+}
+
+hr {
+    width: 75%;
+}
+
+ul > li {
+    float: left;
+    padding-right: 20px;
+    font-size: 1.5em;
+    list-style: none;
+}
+
+a {
+    color: black;
+    font-style: italic;
+}
+
+.posts:first-child {
+    box-sizing: border-box;
+    margin-top: 75px;
+}
+
+.posts {
+    margin-top: 17px;
+}
+
+.border {
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 15px;
+    height: 100%;
+}
+
+#timer {
+    position: absolute;
+    right: 17px;
+}
