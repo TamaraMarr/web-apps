@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <p>Copyright (C) 2017 by BIT</p>
+        <p style={{position: "relative", bottom: "0", textAlign: "center", marginTop: "25px"}}>Copyright (C) 2017 by BIT</p>
     );
 };
 

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 @import url('https://fonts.googleapis.com/css?family=Barlow');
+@import url('https://fonts.googleapis.com/css?family=Arvo');
 
 * {
     font-family: 'Barlow', sans-serif;
@@ -12,27 +13,24 @@
     line-height: 2;
     font-family: 'Indie Flower', cursive;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 hr {
     width: 75%;
 }
 
-ul > li {
-    float: left;
+nav > ul > li {
+    display: inline-block;
     padding-right: 20px;
     font-size: 1.5em;
     list-style: none;
+    margin-top: 13px;
 }
 
 a {
     color: black;
     font-style: italic;
-}
-
-.posts:first-child {
-    box-sizing: border-box;
-    margin-top: 75px;
 }
 
 .posts {
@@ -49,4 +47,9 @@ a {
 #timer {
     position: absolute;
     right: 17px;
+}
+
+.posts h2 {
+    font-family: 'Arvo', serif;
+    text-transform: capitalize;
 }

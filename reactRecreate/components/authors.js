@@ -22,7 +22,6 @@ class Authors extends React.Component {
                  <p>Sam Smith</p>
                 <h2 style={{marginTop: "75px", textAlign: "center"}}>EXPERTISE</h2>
                  <p>Molecular Biology</p>
-                
             </div>
         )
     }

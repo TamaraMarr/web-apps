@@ -2,6 +2,7 @@ import React from "react";
 import Post from "./post";
 import Authors from "./authors";
 import About from "./about";
+import { Link } from 'react-router-dom';
 
 class Main extends React.Component {
     constructor(props) {
@@ -23,9 +24,13 @@ class Main extends React.Component {
         }
 
         return (
-            <div>
+            <div className="row">
                 {posts.map((item) => {
-                    return <Post post={item} key={item.id} />
+                    return (
+                        <Link to={`./postDetails/${item.id}`} key={item.id}>
+                            <Post post={item} postId={item.id} />
+                        </Link>
+                    )
                 })}
             </div>
         )

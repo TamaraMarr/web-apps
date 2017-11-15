@@ -4,7 +4,7 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { time: "pending" };
+        this.state = { time: "The time is..." };
     }
 
     componentDidMount() {

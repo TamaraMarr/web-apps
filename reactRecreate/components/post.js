@@ -1,19 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import PostDetails from "./postDetails";
+import { Link } from 'react-router-dom';
 
+class Post extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
-const Post = (props) => {
-    return (
-        <div className="col-12 posts">
-            <div className="border">
-                <h2 style={{ color: "rgb(172, 111, 172)" }}>{props.post.title}</h2>
-                <p>{props.post.body}</p>
-                <hr />
+    render() {
+        return (
+            <div className="col-12 col-md-6 posts" >
+                <div className="border">
+                    <h2 style={{ color: "rgb(172, 111, 172)" }}>{this.props.post.title}</h2>
+                    <p>{this.props.post.body}</p>
+                    <hr />
+                </div>
             </div>
-        </div>
-    );
-};
-
+        );
+    }
+}
 
 // Post.propTypes = {
 //     post: PropTypes.shape({
