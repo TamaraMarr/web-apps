@@ -1,25 +1,56 @@
 import React from "react";
+import EventListener, {withOptions} from 'react-event-listener';
+
+let intervalToggler;
+let counter = true;
 
 class Timer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { time: "The time is..." };
+        this.state = {
+            time: "The time is..." ,
+            buttonValue: "Stop Timer"
+        };
     }
 
-    componentDidMount() {
-        setInterval(() => {
+    intervalFunc() {
+        intervalToggler = setInterval(() => {
             this.setState({
                 time: new Date().toLocaleTimeString()
             })
+            this.props.tickTock(this.state.time);
         }, this.props.interval);
+    }
+
+    componentDidMount() {
+        this.intervalFunc();
+    }
+
+    
+    handleClick() {
+        if(counter) {
+            clearInterval(intervalToggler);
+            this.setState({
+                buttonValue: 'Start Timer'
+            })
+        } else {
+            this.intervalFunc();
+            this.setState({
+                buttonValue: 'Stop Timer'
+            })
+        }
+        counter = !counter;
     }
 
     render() {
         return (
-            <h2 style={this.props.style} id={'timer'}>
-                {this.state.time}
-            </h2>
+            <div>
+                <h2 style={this.props.style} id={'timer'}>
+                    {this.state.time}
+                </h2>
+                <input type="button" id="stopTimer" value={this.state.buttonValue} onClick={(e) => this.handleClick(e)} />
+            </div>
         );
     }
 }

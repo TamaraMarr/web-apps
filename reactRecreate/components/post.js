@@ -12,7 +12,7 @@ class Post extends React.Component {
         return (
             <div className="col-12 col-md-6 posts" >
                 <div className="border">
-                    <h2 style={{ color: "rgb(172, 111, 172)" }}>{this.props.post.title}</h2>
+                    <Link to={`./postDetails/${this.props.postId}`}><h2 style={{ color: "rgb(172, 111, 172)" }}>{this.props.post.title}</h2> </Link>
                     <p>{this.props.post.body}</p>
                     <hr />
                 </div>

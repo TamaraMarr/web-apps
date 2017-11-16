@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 class AuthorPosts extends React.Component {
     constructor(props) {
         super(props)
+        console.log(props);
 
         this.state = {
             postsInfo: {},
@@ -47,7 +48,7 @@ class AuthorPosts extends React.Component {
                 <ol>
                     {authorsTitles.map((title, index) => {
                         return (
-                            <li style={{textTransform: "capitalize"}} key={index}>{authorsTitles[index]}</li>
+                            <Link to="./PostDetails/"><li style={{textTransform: "capitalize"}} key={index}>{authorsTitles[index]}</li></Link>
                         )
                     })}
                 </ol>
