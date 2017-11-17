@@ -3,10 +3,8 @@ import Post from "./post";
 import Authors from "./authors";
 import About from "./about";
 import Search from "./search";
-
+import ComposePost from "./compose";
 import { Link } from 'react-router-dom';
-
-let toggler = true;
 
 class Main extends React.Component {
     constructor(props) {
@@ -14,59 +12,92 @@ class Main extends React.Component {
 
         this.state = {
             posts: [],
-            matchedPosts: []
+            newPosts: [],
+            matchedPosts: [],
+            allPosts: [],
+            toggler: true
         };
 
         this.searchByTitle = this.searchByTitle.bind(this);
         this.resetPage = this.resetPage.bind(this);
+        // this.createNewPostArray = this.createNewPostArray.bind(this);
+        // this.addNewPost = this.addNewPost.bind(this);
     }
 
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
-            .then(posts => this.setState({ 
-                posts }),
-                toggler = false
-            )
+            .then(posts => this.setState({
+                posts
+            }),
+            this.setState({
+                toggler: false
+            })
+        ).then((response) => {
+            let jbniState = JSON.stringify(this.state.posts);
+            localStorage.setItem('allPosts', jbniState);
+        })
+        
+
+        // this.createNewPostArray();
     }
 
-    searchByTitle(searchTerm) {
-        const matchedPosts = this.state.posts.filter(post => (post.title.indexOf(searchTerm) >= 0))
+    // createNewPostArray() {
+    //     this.addNewPost();
 
+    //     let allPostsTogether = this.state.allPosts;
+    //     allPostsTogether = this.state.posts.concat(this.state.newPosts)
+
+    //     this.setState({
+    //         allPosts: allPostsTogether
+    //     })
+    // }
+
+    // addNewPost() {
+    //     let newPost = localStorage.getItem('newPosts');
+
+       
+    //     console.log(newPost);
+
+    //     this.setState({
+    //         newPost: parsedPosts
+    //     })
+    // }
+
+    searchByTitle(searchTerm) {
+        // let allPosts = get
+        const matchedPosts = this.state.posts.filter(post => (post.title.indexOf(searchTerm) >= 0))
+        
         this.setState({
             matchedPosts
         })
-        toggler = true
+        this.setState({
+            toggler: true
+        })
     }
 
-    resetPage(){
+    resetPage() {
         this.setState({
-            posts: this.state.posts
-        })
-        toggler = false;
+            toggler: false
+        });
     }
 
     render() {
         let posts;
+        let newPosts = localStorage.getItem('newAllPosts');
+        console.log(newPosts);
 
-        if(!toggler) {
-            posts = this.state.posts;
+        if (!this.state.toggler) {
+            posts = JSON.parse(newPosts);
         } else {
             posts = this.state.matchedPosts;
         }
 
-        if (posts.length === 0) {
-            return (
-                <div>
-                    <p>No posts</p>
-                    <Search handleInputByTitle={this.searchByTitle} resetResults={this.resetPage} />
-                </div>
-            )
-        }
-        
+
+
         return (
             <div>
-            <Search handleInputByTitle={this.searchByTitle} resetPage={this.resetPage}/>
+                <Search handleInputByTitle={this.searchByTitle} resetResults={this.resetPage} instant={true} />
                 <div className="row">
                     {posts.map((item) => {
                         return (

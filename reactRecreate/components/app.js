@@ -6,6 +6,7 @@ import Footer from './footer';
 import Authors from './authors';
 import About from './about';
 import PostDetails from './postDetails';
+import ComposePost from './compose';
 
 class App extends React.Component {
     // constructor(props) {
@@ -22,6 +23,7 @@ class App extends React.Component {
                         <Route path='/authors' component={Authors} />
                         <Route path='/about' component={About} />
                         <Route path='/postDetails/:postId' component={PostDetails} />
+                        <Route path='/compose' component={ComposePost} />
                     </Switch>
                 </div>
                 <Footer />

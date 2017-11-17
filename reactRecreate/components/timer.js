@@ -10,7 +10,7 @@ class Timer extends React.Component {
 
         this.state = {
             time: "The time is..." ,
-            buttonValue: "Stop Timer"
+            buttonValue: "Stop Time"
         };
     }
 
@@ -32,12 +32,12 @@ class Timer extends React.Component {
         if(counter) {
             clearInterval(intervalToggler);
             this.setState({
-                buttonValue: 'Start Timer'
+                buttonValue: 'Start Time'
             })
         } else {
             this.intervalFunc();
             this.setState({
-                buttonValue: 'Stop Timer'
+                buttonValue: 'Stop Time'
             })
         }
         counter = !counter;

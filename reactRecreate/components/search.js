@@ -15,13 +15,19 @@ class Search extends React.Component {
     }
 
     handleInput(event) {
-        let input = this.state.inputVal;
-        this.setState({
-            inputVal: event.target.value
-        })
+        let input = event.target.value;
 
-        if(!input){
+        this.setState({
+            inputVal: input
+        });
+
+        if (input === "") {
             this.props.resetResults();
+            return;
+        }
+
+        if (this.props.instant) {
+            this.props.handleInputByTitle(input);
         }
     }
 
@@ -33,13 +39,13 @@ class Search extends React.Component {
         if (e.key === 'Enter') {
             this.props.handleInputByTitle(this.state.inputVal);
         }
-      }
+    }
 
     render() {
         return (
             <div>
                 <input id="inputVal" onChange={this.handleInput} value={this.state.inputVal} onKeyPress={this.handleKeyPress} />
-                <button onClick={this.handleClick}>Search</button>
+                {!this.props.instant ? <button onClick={this.handleClick}>Search</button> : '   Instant search is on.'}
             </div>
         )
     }
