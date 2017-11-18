@@ -4,7 +4,9 @@ import Authors from "./authors";
 import About from "./about";
 import Search from "./search";
 import ComposePost from "./compose";
-import { Link } from 'react-router-dom';
+import {
+    Link
+} from 'react-router-dom';
 
 class Main extends React.Component {
     constructor(props) {
@@ -27,51 +29,33 @@ class Main extends React.Component {
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
-            .then(posts => this.setState({
-                posts
-            }),
-            this.setState({
-                toggler: false
+            .then(posts => {
+                this.setState({
+                        posts
+                    }),
+                this.setState({
+                        toggler: false
+                    })
             })
-        ).then((response) => {
-            let jbniState = JSON.stringify(this.state.posts);
-            localStorage.setItem('allPosts', jbniState);
-        })
-        
-
-        // this.createNewPostArray();
+            .then((response) => {
+                let jbniState = JSON.stringify(this.state.posts);
+                localStorage.setItem('allPosts', jbniState);
+            })
     }
 
-    // createNewPostArray() {
-    //     this.addNewPost();
-
-    //     let allPostsTogether = this.state.allPosts;
-    //     allPostsTogether = this.state.posts.concat(this.state.newPosts)
-
-    //     this.setState({
-    //         allPosts: allPostsTogether
-    //     })
-    // }
-
-    // addNewPost() {
-    //     let newPost = localStorage.getItem('newPosts');
-
-       
-    //     console.log(newPost);
-
-    //     this.setState({
-    //         newPost: parsedPosts
-    //     })
-    // }
-
     searchByTitle(searchTerm) {
-        // let allPosts = get
-        const matchedPosts = this.state.posts.filter(post => (post.title.indexOf(searchTerm) >= 0))
-        
+        if(localStorage.getItem('allPosts')) {
+            let newPosts = localStorage.getItem('allPosts');
+            newPosts = JSON.parse(newPosts);
+            const matchedPosts = newPosts.filter(post => (post.title.indexOf(searchTerm) >= 0));
+        } else {
+            let newPosts = localStorage.getItem('allPosts');
+            newPosts = JSON.parse(newPosts);
+            const matchedPosts = this.state.newPosts.filter(post => (post.title.indexOf(searchTerm) >= 0));
+        }
+
         this.setState({
-            matchedPosts
-        })
-        this.setState({
+            matchedPosts,
             toggler: true
         })
     }
@@ -84,26 +68,30 @@ class Main extends React.Component {
 
     render() {
         let posts;
-        let newPosts = localStorage.getItem('newAllPosts');
-        console.log(newPosts);
 
         if (!this.state.toggler) {
-            posts = JSON.parse(newPosts);
+            if(localStorage.getItem('allPosts')) {
+                let newPosts = localStorage.getItem('allPosts');
+                posts = JSON.parse(newPosts);
+                console.log(posts + ' U IFU U IFU')
+            } else {
+                let newPosts = localStorage.getItem('allPosts');
+                posts = JSON.parse(newPosts);
+                console.log(posts + ' U PRETPOSLEDNJEM ELSU')
+            }
         } else {
             posts = this.state.matchedPosts;
+            console.log(posts + ' U POSLEDNJEM ELSU')
         }
-
-
 
         return (
             <div>
-                <Search handleInputByTitle={this.searchByTitle} resetResults={this.resetPage} instant={true} />
+            <Search handleInputByTitle={this.searchByTitle} resetResults={this.resetPage} instant={false} />
                 <div className="row">
                     {posts.map((item) => {
-                        return (
-                            <Post post={item} postId={item.id} key={item.id} />
-                        )
-                    })}
+                        return (<Post post={item} postId={item.id} key={item.id} />)
+                    })
+                    }
                 </div>
             </div>
         )
