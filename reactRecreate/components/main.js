@@ -1,4 +1,5 @@
 import React from "react";
+
 import Post from "./post";
 import Authors from "./authors";
 import About from "./about";
@@ -14,14 +15,13 @@ class Main extends React.Component {
             posts: [],
             newPosts: [],
             matchedPosts: [],
-            allPosts: [],
             toggler: true
         };
 
         this.searchByTitle = this.searchByTitle.bind(this);
         this.resetPage = this.resetPage.bind(this);
-        // this.createNewPostArray = this.createNewPostArray.bind(this);
-        // this.addNewPost = this.addNewPost.bind(this);
+        this.createNewPostArray = this.createNewPostArray.bind(this);
+        this.addNewPost = this.addNewPost.bind(this);
     }
 
     componentDidMount() {
@@ -33,41 +33,54 @@ class Main extends React.Component {
             this.setState({
                 toggler: false
             })
-        ).then((response) => {
-            let jbniState = JSON.stringify(this.state.posts);
-            localStorage.setItem('allPosts', jbniState);
-        })
-        
+            ).then((response) => {
+                let postsForLocalStorage = JSON.stringify(this.state.posts);
+                localStorage.setItem('allPosts', postsForLocalStorage);
+                this.searchByTitle('');
+            })
 
-        // this.createNewPostArray();
+        if (!localStorage.getItem('newAllPosts')) {
+            this.setState({
+                posts: localStorage.getItem('allPosts')
+            })
+        } else {
+            this.setState({
+                posts: localStorage.getItem('newAllPosts')
+            })
+        }
+
     }
 
-    // createNewPostArray() {
-    //     this.addNewPost();
+    createNewPostArray() {
+        this.addNewPost();
 
-    //     let allPostsTogether = this.state.allPosts;
-    //     allPostsTogether = this.state.posts.concat(this.state.newPosts)
+        let allPostsTogether = this.state.allPosts;
+        allPostsTogether = this.state.posts.concat(this.state.newPosts)
 
-    //     this.setState({
-    //         allPosts: allPostsTogether
-    //     })
-    // }
+        this.setState({
+            allPosts: allPostsTogether
+        })
+    }
 
-    // addNewPost() {
-    //     let newPost = localStorage.getItem('newPosts');
+    addNewPost() {
+        let newPost = localStorage.getItem('newAllPosts');
 
-       
-    //     console.log(newPost);
-
-    //     this.setState({
-    //         newPost: parsedPosts
-    //     })
-    // }
+        this.setState({
+            newPosts: newPost
+        })
+    }
 
     searchByTitle(searchTerm) {
-        // let allPosts = get
+        let posts;
+
+        if (!localStorage.getItem('allNewPosts')) {
+            posts = localStorage.getItem('allPosts');
+        } else {
+            posts = localStorage.getItem('newAllPosts');
+        }
+
         const matchedPosts = this.state.posts.filter(post => (post.title.indexOf(searchTerm) >= 0))
-        
+
         this.setState({
             matchedPosts
         })
@@ -83,17 +96,23 @@ class Main extends React.Component {
     }
 
     render() {
-        let posts;
-        let newPosts = localStorage.getItem('newAllPosts');
-        console.log(newPosts);
+        // let newPosts;
+
+        // if(!localStorage.getItem('newAllPosts')) {
+        //     newPosts = localStorage.getItem('allPosts');
+        // } else {
+        //     newPosts = localStorage.getItem('newAllPosts');
+        // }
+
+        if(this.state.posts = null) {
+            let posts = [];
+        }
 
         if (!this.state.toggler) {
-            posts = JSON.parse(newPosts);
+            posts = JSON.parse(this.state.posts);
         } else {
             posts = this.state.matchedPosts;
         }
-
-
 
         return (
             <div>

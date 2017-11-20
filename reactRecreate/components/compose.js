@@ -50,7 +50,7 @@ class ComposePost extends React.Component {
             .then((ourPost) => {
                 let allPosts = localStorage.getItem('allPosts');
                 let allPostsArr = JSON.parse(allPosts);
-                allPostsArr.push(ourPost);
+                allPostsArr.unshift(ourPost);
                 let allPostsString = JSON.stringify(allPostsArr);
                 localStorage.setItem('newAllPosts', allPostsString);
             })
