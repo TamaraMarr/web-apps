@@ -50,10 +50,9 @@ class ComposePost extends React.Component {
             .then((ourPost) => {
                 let allPosts = localStorage.getItem('allPosts');
                 let allPostsArr = JSON.parse(allPosts);
-                let ourParsedPost = JSON.parse(ourPost)
-                allPostsArr.push(ourParsedPost);
-                let allPostsStringified = JSON.stringify(allPostsArr);
-                localStorage.setItem('newAllPosts', allPostsStringified);
+                allPostsArr.unshift(ourPost);
+                let allPostsString = JSON.stringify(allPostsArr);
+                localStorage.setItem('newAllPosts', allPostsString);
             })
 
             this.props.history.push('/');
